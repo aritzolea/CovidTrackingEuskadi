@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:text="COVID Tracking Euskadi"
+        android:text="COVID Euskadi"
         android:textColor="#2196F3"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
