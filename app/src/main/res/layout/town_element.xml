@@ -23,13 +23,13 @@
             android:padding="6dp">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/linearLayoutLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="4dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -44,7 +44,40 @@
 
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/linearLayoutRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="2dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="Incidencia"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/incidenceText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="643.84"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!--<TextView
                 android:id="@+id/incidenceText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +88,7 @@
                 android:layout_marginRight="6dp"
                 android:text="Incidencia"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold" />-->
 
         </RelativeLayout>
 
