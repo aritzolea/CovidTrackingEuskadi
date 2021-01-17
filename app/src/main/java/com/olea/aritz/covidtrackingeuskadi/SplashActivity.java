@@ -30,9 +30,7 @@ public class SplashActivity extends AppCompatActivity {
         topAnimation.setAnimationListener(new Animation.AnimationListener(){
 
             @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
+            public void onAnimationStart(Animation animation) { }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -40,9 +38,7 @@ public class SplashActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
+            public void onAnimationRepeat(Animation animation) { }
         });
 
         splashImageView = findViewById(R.id.splashImageView);
@@ -62,6 +58,6 @@ public class SplashActivity extends AppCompatActivity {
 
                 finish();
             }
-        }, 5000); //TODO: Lo hace por tiempo, habrá que hacerlo cuando los datos estén cargados
+        }, 5000);
     }
 }
