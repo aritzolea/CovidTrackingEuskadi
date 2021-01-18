@@ -1,6 +1,7 @@
 package com.olea.aritz.covidtrackingeuskadi;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,15 +65,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
 
         void bindData(final ListElement item) {
-            backgroundElement.setCardBackgroundColor(item.getColor());
+            //backgroundElement.setCardBackgroundColor(item.getColor());
+            if (towns.indexOf(item) % 2 == 0)
+                backgroundElement.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            else
+                backgroundElement.setCardBackgroundColor(Color.parseColor("#E2F2FF"));
             town.setText(item.getTown());
             incidence.setText(item.getIncidence());
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(item);
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onItemClick(item));
         }
     }
 

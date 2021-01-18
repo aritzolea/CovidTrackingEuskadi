@@ -14,7 +14,13 @@ import java.util.List;
 
 public class TownsTableActivity extends AppCompatActivity {
 
-    List<ListElement> towns;
+    private List<ListElement> towns;
+
+    final String RED = "#FF6F6F";
+    final String ORANGE = "#FFA86F";
+    final String YELLOW = "#FFF66F";
+    final String GREEN = "#6FFF6F";
+    final String WHITE = "#FFFFFF";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,31 +33,14 @@ public class TownsTableActivity extends AppCompatActivity {
 
     public void init() {
         towns = new ArrayList<>();
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain1", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain2", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain3", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain4", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain5", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain6", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain7", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain8", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain9", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain10", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain11", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain12", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain13", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain14", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain15", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain16", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain17", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain18", "700"));
-        towns.add(new ListElement(Color.parseColor("#FFA7A7"), "Beasain19", "700"));
+        towns.add(new ListElement(Color.parseColor(ORANGE), "Lazkao", "9999"));
+        towns.add(new ListElement(Color.parseColor(GREEN), "Ataun", "430"));
+        towns.add(new ListElement(Color.parseColor(GREEN), "Beasain", "430"));
+        towns.add(new ListElement(Color.parseColor(GREEN), "Tolosa", "430"));
 
-        ListAdapter listAdapter = new ListAdapter(towns, this, new ListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(ListElement item) {
-                moveToTownDetails(item);
-            }
+        ListAdapter listAdapter = new ListAdapter(towns, this, item -> {
+            //TODO: BUG: Se puede hacer click rápido en dos municipios y se abren los dos
+            moveToTownDetails(item);
         });
 
         RecyclerView recyclerView = findViewById(R.id.townList);

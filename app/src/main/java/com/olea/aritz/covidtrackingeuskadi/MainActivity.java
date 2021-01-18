@@ -21,13 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
         townsButton = findViewById(R.id.townsButton);
 
-        townsButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TownsTableActivity.class);
-                startActivity(intent);
-            }
+        townsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, TownsTableActivity.class);
+            startActivity(intent);
         });
     }
 }
