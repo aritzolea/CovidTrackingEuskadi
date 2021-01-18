@@ -2,9 +2,11 @@ package com.olea.aritz.covidtrackingeuskadi;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -55,6 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView backgroundElement;
         TextView town, incidence;
+        ImageView incidenceCircle;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -62,16 +65,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             backgroundElement = itemView.findViewById(R.id.backgroundElement);
             town = itemView.findViewById(R.id.townText);
             incidence = itemView.findViewById(R.id.incidenceText);
+            incidenceCircle = itemView.findViewById(R.id.incidenceCircle);
         }
 
         void bindData(final ListElement item) {
-            //backgroundElement.setCardBackgroundColor(item.getColor());
             if (towns.indexOf(item) % 2 == 0)
                 backgroundElement.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             else
                 backgroundElement.setCardBackgroundColor(Color.parseColor("#E2F2FF"));
+
             town.setText(item.getTown());
             incidence.setText(item.getIncidence());
+            incidenceCircle.setColorFilter(item.getColor(), PorterDuff.Mode.SRC_IN);
+
             itemView.setOnClickListener(v -> listener.onItemClick(item));
         }
     }
