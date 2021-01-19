@@ -58,7 +58,7 @@ public class TownsTableActivity extends AppCompatActivity {
                         towns.add(le);
                 } else {
                     for (ListElement le: townsOriginal) {
-                        if (le.getTown().toLowerCase().startsWith(newText.trim().toLowerCase()))
+                        if (le.getTown().toLowerCase().contains(newText.trim().toLowerCase()))
                             towns.add(le);
                     }
                 }
