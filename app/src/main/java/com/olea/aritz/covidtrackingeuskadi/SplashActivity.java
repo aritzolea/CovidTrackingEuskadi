@@ -135,7 +135,7 @@ public class SplashActivity extends AppCompatActivity {
                             JSONObject jsonObject = response.getJSONObject(i);
 
                             String name = jsonObject.getString("name");
-                            int incidence = jsonObject.getInt("incidence");
+                            double incidence = jsonObject.getDouble("incidence");
                             int code = jsonObject.getInt("code");
                             int population = jsonObject.getInt("population");
 

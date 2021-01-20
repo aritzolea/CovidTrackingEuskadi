@@ -15,10 +15,10 @@ public class ListElement implements Serializable {
 
     private int color;
     private String town;
-    private int incidence;
+    private double incidence;
     private int code;
 
-    public ListElement(String town, int incidence, int code, int population) {
+    public ListElement(String town, double incidence, int code, int population) {
         int colorToShow;
 
         if (population > 5000) colorToShow = getIncidenceColor(incidence);
@@ -46,15 +46,15 @@ public class ListElement implements Serializable {
         this.town = town;
     }
 
-    public int getIncidence() {
+    public double getIncidence() {
         return incidence;
     }
 
-    public void setIncidence(int incidence) {
+    public void setIncidence(double incidence) {
         this.incidence = incidence;
     }
 
-    public int getIncidenceColor(int incidence) {
+    public int getIncidenceColor(double incidence) {
         if (incidence < 60) return Color.parseColor(GREEN);
         else if (incidence < 300) return Color.parseColor(YELLOW);
         else if (incidence < 500) return Color.parseColor(ORANGE);

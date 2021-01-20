@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,7 +51,14 @@ public class MainActivity extends AppCompatActivity {
         incidenceBIText = findViewById(R.id.incidenceBIText);
         incidenceARText = findViewById(R.id.incidenceARText);
 
-        lastUpdateText.setText("Última actualización: " + BackendData.lastUpdateDate);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        DateFormat destinyFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        try {
+            lastUpdateText.setText("Última actualización: " + destinyFormat.format(format.parse(BackendData.lastUpdateDate)));
+        } catch (ParseException e) {
+            lastUpdateText.setText("Última actualización: -");
+        }
         newPositivesText.setText(String.valueOf(BackendData.dayPositives));
         r0Text.setText(String.valueOf(BackendData.r0));
         totalHospitalText.setText(String.valueOf(BackendData.totalHospital));
