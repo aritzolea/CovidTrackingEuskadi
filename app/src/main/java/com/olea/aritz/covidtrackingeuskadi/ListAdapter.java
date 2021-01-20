@@ -70,12 +70,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         void bindData(final ListElement item) {
             if (towns.indexOf(item) % 2 == 0)
-                backgroundElement.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                backgroundElement.setCardBackgroundColor(Color.parseColor("#F5F5F5"));
             else
                 backgroundElement.setCardBackgroundColor(Color.parseColor("#E2F2FF"));
 
             town.setText(item.getTown());
-            incidence.setText(item.getIncidence());
+            incidence.setText(String.valueOf(item.getIncidence()));
             incidenceCircle.setColorFilter(item.getColor(), PorterDuff.Mode.SRC_IN);
 
             itemView.setOnClickListener(v -> listener.onItemClick(item));

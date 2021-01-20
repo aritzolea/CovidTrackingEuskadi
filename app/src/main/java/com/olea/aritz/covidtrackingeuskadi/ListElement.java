@@ -1,17 +1,33 @@
 package com.olea.aritz.covidtrackingeuskadi;
 
+import android.graphics.Color;
+import android.util.Log;
+
 import java.io.Serializable;
 
 public class ListElement implements Serializable {
 
+    final String RED = "#FF6F6F";
+    final String ORANGE = "#FFA86F";
+    final String YELLOW = "#FFF66F";
+    final String GREEN = "#6FFF6F";
+    final String WHITE = "#FFFFFF";
+
     private int color;
     private String town;
-    private String incidence;
+    private int incidence;
+    private int code;
 
-    public ListElement(int color, String town, String incidence) {
-        this.color = color;
+    public ListElement(String town, int incidence, int code, int population) {
+        int colorToShow;
+
+        if (population > 5000) colorToShow = getIncidenceColor(incidence);
+        else colorToShow = Color.parseColor(WHITE);
+
+        this.color = colorToShow;
         this.town = town;
         this.incidence = incidence;
+        this.code = code;
     }
 
     public int getColor() {
@@ -30,11 +46,18 @@ public class ListElement implements Serializable {
         this.town = town;
     }
 
-    public String getIncidence() {
+    public int getIncidence() {
         return incidence;
     }
 
-    public void setIncidence(String incidence) {
+    public void setIncidence(int incidence) {
         this.incidence = incidence;
+    }
+
+    public int getIncidenceColor(int incidence) {
+        if (incidence < 60) return Color.parseColor(GREEN);
+        else if (incidence < 300) return Color.parseColor(YELLOW);
+        else if (incidence < 500) return Color.parseColor(ORANGE);
+        else return Color.parseColor(RED);
     }
 }

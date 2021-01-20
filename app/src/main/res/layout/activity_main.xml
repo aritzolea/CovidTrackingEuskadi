@@ -253,7 +253,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="100dp"
-                            android:width="100dp"
                             android:fontFamily="sans-serif-black"
                             android:text="TOTAL POSITIVOS"
                             android:textStyle="bold"
@@ -269,6 +268,7 @@
                             android:layout_marginTop="50dp"
                             android:fontFamily="sans-serif-black"
                             android:text="GIPUZKOA"
+                            android:textSize="10sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -277,7 +277,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/TotalPositivesGIText"
+                            android:id="@+id/totalPositivesGIText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="50dp"
@@ -298,6 +298,7 @@
                             android:layout_marginTop="90dp"
                             android:fontFamily="sans-serif-black"
                             android:text="BIZKAIA"
+                            android:textSize="10sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -327,6 +328,7 @@
                             android:layout_marginTop="130dp"
                             android:fontFamily="sans-serif-black"
                             android:text="ARABA"
+                            android:textSize="10sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -407,6 +409,7 @@
                             android:layout_marginTop="50dp"
                             android:fontFamily="sans-serif-black"
                             android:text="GIPUZKOA"
+                            android:textSize="10sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -436,6 +439,7 @@
                             android:layout_marginTop="90dp"
                             android:fontFamily="sans-serif-black"
                             android:text="BIZKAIA"
+                            android:textSize="10sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -470,7 +474,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textSize="10sp" />
 
                         <TextView
                             android:id="@+id/incidenceARText"

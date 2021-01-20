@@ -21,15 +21,8 @@ public class TownsTableActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private List<ListElement> towns;
-    private List<ListElement> townsOriginal;
 
     private TownsTableActivity instance;
-
-    final String RED = "#FF6F6F";
-    final String ORANGE = "#FFA86F";
-    final String YELLOW = "#FFF66F";
-    final String GREEN = "#6FFF6F";
-    final String WHITE = "#FFFFFF";
 
     private SearchView searchView;
 
@@ -53,11 +46,11 @@ public class TownsTableActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 towns.clear();
-                if (TextUtils.isEmpty(newText)){
-                    for (ListElement le: townsOriginal)
+                if (TextUtils.isEmpty(newText)) {
+                    for (ListElement le : BackendData.towns)
                         towns.add(le);
                 } else {
-                    for (ListElement le: townsOriginal) {
+                    for (ListElement le : BackendData.towns) {
                         if (le.getTown().toLowerCase().contains(newText.trim().toLowerCase()))
                             towns.add(le);
                     }
@@ -79,15 +72,9 @@ public class TownsTableActivity extends AppCompatActivity {
     }
 
     public void init() {
-        townsOriginal = new ArrayList<>();
-        townsOriginal.add(new ListElement(Color.parseColor(RED), "Lazkao", "9999"));
-        townsOriginal.add(new ListElement(Color.parseColor(WHITE), "Ataun", "430"));
-        townsOriginal.add(new ListElement(Color.parseColor(ORANGE), "Beasain", "430"));
-        townsOriginal.add(new ListElement(Color.parseColor(YELLOW), "Donostia", "230"));
-        townsOriginal.add(new ListElement(Color.parseColor(GREEN), "Tolosa", "99"));
 
         towns = new ArrayList<>();
-        for (ListElement le: townsOriginal) {
+        for (ListElement le : BackendData.towns) {
             towns.add(le);
         }
 
