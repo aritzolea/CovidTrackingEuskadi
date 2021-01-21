@@ -1,6 +1,7 @@
 package com.olea.aritz.covidtrackingeuskadi;
 
 import java.util.List;
+import java.util.Map;
 
 public class BackendData {
 
@@ -20,5 +21,8 @@ public class BackendData {
     public static double incidenceAR;
 
     public static List<ListElement> towns;
+
+    public static double townR0;
+    public static Map<String, Integer> townIncidences;
 
 }

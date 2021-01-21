@@ -17,6 +17,7 @@ public class ListElement implements Serializable {
     private String town;
     private double incidence;
     private int code;
+    private int population;
 
     public ListElement(String town, double incidence, int code, int population) {
         int colorToShow;
@@ -28,6 +29,7 @@ public class ListElement implements Serializable {
         this.town = town;
         this.incidence = incidence;
         this.code = code;
+        this.population = population;
     }
 
     public int getColor() {
@@ -52,6 +54,22 @@ public class ListElement implements Serializable {
 
     public void setIncidence(double incidence) {
         this.incidence = incidence;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(int population) {
+        this.population = population;
     }
 
     public int getIncidenceColor(double incidence) {

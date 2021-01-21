@@ -5,13 +5,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.WindowManager;
 import android.widget.SearchView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class TownsTableActivity extends AppCompatActivity {
@@ -91,6 +99,36 @@ public class TownsTableActivity extends AppCompatActivity {
     }
 
     private void moveToTownDetails(ListElement townItem) {
+        String townDataUrl = "http://35.180.25.221:1512/town/" + townItem.getCode();
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        JsonArrayRequest townRequest = new JsonArrayRequest(Request.Method.GET, townDataUrl, null,
+                response -> {
+                    try {
+                        BackendData.townIncidences = new HashMap<>();
+
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject jsonObject = response.getJSONObject(i);
+
+                            if (i == 0) {
+                                BackendData.townR0 = jsonObject.getDouble("r0");
+                            }
+
+                            BackendData.townIncidences.put(jsonObject.getString("date"), jsonObject.getInt("incidence"));
+                        }
+                    } catch (JSONException e) {
+                        //TODO: Dar error al LEER los datos
+                    }
+
+                },
+                error -> {
+                    //TODO: Dar error al OBTENER los datos
+                }
+        );
+
+        requestQueue.add(townRequest);
+
         Intent intent = new Intent(this, TownDetailsActivity.class);
         intent.putExtra("ListElement", townItem);
         startActivity(intent);

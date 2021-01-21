@@ -1,8 +1,13 @@
 package com.olea.aritz.covidtrackingeuskadi;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -15,6 +20,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,6 +71,27 @@ public class SplashActivity extends AppCompatActivity {
         splashTitle.setAnimation(topAnimation);
         splashSubtitle.setAnimation(topAnimation);
 
+        ConnectivityManager cm =
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if (!isConnected) {
+            AlertDialog internetDialog = new MaterialAlertDialogBuilder(this).setMessage("Esta aplicación no puede funcionar sin conexión a Internet.")
+                    .setPositiveButton("OK", null)
+                    .show();
+
+            internetDialog.setOnDismissListener(dialog -> {
+                finish();
+                System.exit(0);
+            });
+
+            return;
+        }
+
         requestQueue = Volley.newRequestQueue(this);
 
         getGeneralAndTownsInfo();
@@ -77,26 +105,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void getGeneralAndTownsInfo() {
-        String lastUpdateUrl = "http://35.180.25.221:1512/last_update";
         String generalDataUrl = "http://35.180.25.221:1512/general_data";
         String townsDataUrl = "http://35.180.25.221:1512/towns";
-
-        JsonArrayRequest lastUpdateRequest = new JsonArrayRequest(Request.Method.GET, lastUpdateUrl, null,
-                response -> {
-                    JSONObject jsonObject;
-                    try {
-                        jsonObject = response.getJSONObject(0);
-
-                        BackendData.lastUpdateDate = jsonObject.getString("value");
-                    } catch (JSONException e) {
-                        //TODO: Dar error al LEER los datos
-                    }
-
-                },
-                error -> {
-                    //TODO: Dar error al OBTENER los datos
-                }
-        );
 
         JsonArrayRequest generalDataRequest = new JsonArrayRequest(Request.Method.GET, generalDataUrl, null,
                 response -> {
@@ -104,6 +114,7 @@ public class SplashActivity extends AppCompatActivity {
                     try {
                         jsonObject = response.getJSONObject(0);
 
+                        BackendData.lastUpdateDate = jsonObject.getString("last_update");
                         BackendData.dayPositives = jsonObject.getInt("day_positives");
                         BackendData.r0 = jsonObject.getDouble("r0");
                         BackendData.totalHospital = jsonObject.getInt("total_hospital");
@@ -151,7 +162,6 @@ public class SplashActivity extends AppCompatActivity {
                 }
         );
 
-        requestQueue.add(lastUpdateRequest);
         requestQueue.add(generalDataRequest);
         requestQueue.add(townsRequest);
     }
