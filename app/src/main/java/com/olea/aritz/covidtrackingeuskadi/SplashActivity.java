@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -27,6 +26,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -142,15 +143,27 @@ public class SplashActivity extends AppCompatActivity {
                     try {
                         BackendData.towns = new ArrayList<>();
 
-                        for (int i = 0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i += 14) {
                             JSONObject jsonObject = response.getJSONObject(i);
 
                             String name = jsonObject.getString("name");
                             double incidence = jsonObject.getDouble("incidence");
                             int code = jsonObject.getInt("code");
                             int population = jsonObject.getInt("population");
+                            double r0 = jsonObject.getDouble("r0");
 
-                            BackendData.towns.add(new ListElement(name, incidence, code, population));
+                            Map<String, Integer> incidencesMap = new LinkedHashMap<>();
+
+                            for (int j = i; j < i + 14; j++) {
+                                JSONObject jsonIndividualObject = response.getJSONObject(j);
+
+                                String date = jsonIndividualObject.getString("date");
+                                int day_incidence = jsonIndividualObject.getInt("day_incidence");
+
+                                incidencesMap.put(date, day_incidence);
+                            }
+
+                            BackendData.towns.add(new ListElement(name, incidence, code, population, r0, incidencesMap));
                         }
                     } catch (JSONException e) {
                         //TODO: Dar error al LEER los datos

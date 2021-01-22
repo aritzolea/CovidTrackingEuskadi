@@ -22,7 +22,4 @@ public class BackendData {
 
     public static List<ListElement> towns;
 
-    public static double townR0;
-    public static Map<String, Integer> townIncidences;
-
 }

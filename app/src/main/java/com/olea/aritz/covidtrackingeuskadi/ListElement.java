@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class ListElement implements Serializable {
 
@@ -18,8 +19,11 @@ public class ListElement implements Serializable {
     private double incidence;
     private int code;
     private int population;
+    private double r0;
 
-    public ListElement(String town, double incidence, int code, int population) {
+    private Map<String, Integer> incidences;
+
+    public ListElement(String town, double incidence, int code, int population, double r0, Map<String, Integer> incidences) {
         int colorToShow;
 
         if (population > 5000) colorToShow = getIncidenceColor(incidence);
@@ -30,6 +34,9 @@ public class ListElement implements Serializable {
         this.incidence = incidence;
         this.code = code;
         this.population = population;
+        this.r0 = r0;
+
+        this.incidences = incidences;
     }
 
     public int getColor() {
@@ -70,6 +77,22 @@ public class ListElement implements Serializable {
 
     public void setPopulation(int population) {
         this.population = population;
+    }
+
+    public double getR0() {
+        return r0;
+    }
+
+    public void setR0(double r0) {
+        this.r0 = r0;
+    }
+
+    public Map<String, Integer> getIncidences() {
+        return incidences;
+    }
+
+    public void setIncidences(Map<String, Integer> incidences) {
+        this.incidences = incidences;
     }
 
     public int getIncidenceColor(double incidence) {
