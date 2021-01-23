@@ -94,7 +94,11 @@ public class TownDetailsActivity extends AppCompatActivity {
         townName.setText(element.getTown());
         populationText.setText(String.valueOf(element.getPopulation()));
         townIncidenceText.setText(String.valueOf(element.getIncidence()));
-        townR0Text.setText(String.valueOf(element.getR0()));
+
+        if (element.getR0() == -1)
+            townR0Text.setText("-");
+        else
+            townR0Text.setText(String.valueOf(element.getR0()));
 
         if (element.getPopulation() >= 5000) applyIncidenceColor(townIncidenceText);
 
