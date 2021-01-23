@@ -14,20 +14,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp">
+            android:layout_height="0dp"
+            android:layout_weight="0.1">
 
             <TextView
                 android:id="@+id/townName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="26dp"
-                android:layout_marginTop="26dp"
                 android:layout_marginEnd="26dp"
                 android:height="75dp"
+                android:gravity="center"
                 android:maxWidth="350dp"
                 android:text="Beasain"
                 android:textAlignment="center"
-                android:gravity="center"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
             android:orientation="vertical">
 
             <androidx.gridlayout.widget.GridLayout
@@ -62,7 +63,7 @@
                     app:layout_column="0"
                     app:layout_columnWeight="1"
                     app:layout_row="0"
-                    app:layout_rowWeight="1" >
+                    app:layout_rowWeight="1">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
