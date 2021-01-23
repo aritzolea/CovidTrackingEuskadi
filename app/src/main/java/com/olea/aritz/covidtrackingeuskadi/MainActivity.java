@@ -5,17 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     TextView lastUpdateText, newPositivesText, r0Text, totalHospitalText, totalUCIText,
             totalPositivesText, totalPositivesGIText, totalPositivesBIText, totalPositivesARText,
             incidenceText, incidenceGIText, incidenceBIText, incidenceARText;
+
+    AdView mAdView;
 
     final String RED = "#FF6F6F";
     final String ORANGE = "#FFA86F";
@@ -76,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
         applyIncidenceColor(incidenceGIText);
         applyIncidenceColor(incidenceBIText);
         applyIncidenceColor(incidenceARText);
+
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         townsButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, TownsTableActivity.class);

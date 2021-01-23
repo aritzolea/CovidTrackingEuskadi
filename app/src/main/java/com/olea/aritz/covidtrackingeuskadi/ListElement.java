@@ -1,7 +1,6 @@
 package com.olea.aritz.covidtrackingeuskadi;
 
 import android.graphics.Color;
-import android.util.Log;
 
 import java.io.Serializable;
 import java.util.Map;

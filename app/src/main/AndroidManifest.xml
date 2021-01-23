@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.CovidTrackingEuskadi">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7832160278191979~6969589065"/>
+
         <activity android:name=".TownDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
