@@ -25,6 +25,8 @@ public class TownsTableActivity extends AppCompatActivity {
 
     private SearchView searchView;
 
+    private boolean clickable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class TownsTableActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
 
         instance = this;
+        clickable = true;
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -57,7 +60,8 @@ public class TownsTableActivity extends AppCompatActivity {
 
                 listAdapter = new ListAdapter(towns, instance, item -> {
                     //TODO: BUG: Se puede hacer click rápido en dos municipios y se abren los dos
-                    moveToTownDetails(item);
+                    if (clickable)
+                        moveToTownDetails(item);
                 });
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(instance));
@@ -70,6 +74,18 @@ public class TownsTableActivity extends AppCompatActivity {
         init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        clickable = true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        clickable = true;
+    }
+
     public void init() {
 
         towns = new ArrayList<>();
@@ -79,7 +95,8 @@ public class TownsTableActivity extends AppCompatActivity {
 
         listAdapter = new ListAdapter(towns, this, item -> {
             //TODO: BUG: Se puede hacer click rápido en dos municipios y se abren los dos
-            moveToTownDetails(item);
+            if (clickable)
+                moveToTownDetails(item);
         });
 
         recyclerView = findViewById(R.id.townList);
@@ -93,6 +110,7 @@ public class TownsTableActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TownDetailsActivity.class);
         intent.putExtra("ListElement", townItem);
         startActivity(intent);
+        clickable = false;
     }
 
 }
