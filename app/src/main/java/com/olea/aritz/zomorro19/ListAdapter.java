@@ -1,4 +1,4 @@
-package com.olea.aritz.covidtrackingeuskadi;
+package com.olea.aritz.zomorro19;
 
 import android.content.Context;
 import android.graphics.Color;

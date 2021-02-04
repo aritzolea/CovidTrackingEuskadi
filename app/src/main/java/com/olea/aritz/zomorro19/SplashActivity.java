@@ -1,9 +1,12 @@
-package com.olea.aritz.covidtrackingeuskadi;
+package com.olea.aritz.zomorro19;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -21,11 +24,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -39,12 +46,17 @@ public class SplashActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
 
+    final String FILENAME = "LASTUPDATE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+
+        MobileAds.initialize(this, initializationStatus -> {
+        });
 
         topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
@@ -99,6 +111,8 @@ public class SplashActivity extends AppCompatActivity {
 
         getGeneralAndTownsInfo();
 
+        scheduleNewDataDetect();
+
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
@@ -130,6 +144,8 @@ public class SplashActivity extends AppCompatActivity {
                         BackendData.incidenceGI = jsonObject.getDouble("incidencegi");
                         BackendData.incidenceBI = jsonObject.getDouble("incidencebi");
                         BackendData.incidenceAR = jsonObject.getDouble("incidencear");
+
+                        writeLastUpdateDate(BackendData.lastUpdateDate);
                     } catch (JSONException e) {
                         //TODO: Dar error al LEER los datos
                     }
@@ -180,4 +196,53 @@ public class SplashActivity extends AppCompatActivity {
         requestQueue.add(generalDataRequest);
         requestQueue.add(townsRequest);
     }
+
+    public void writeLastUpdateDate(String lastUpdate) {
+        FileOutputStream outputStream = null;
+
+        try {
+            outputStream = openFileOutput(FILENAME, MODE_PRIVATE);
+            outputStream.write(lastUpdate.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void scheduleNewDataDetect() {
+        int job_id = 987;
+
+        JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+
+        boolean hasBeenScheduled = false;
+
+        for (JobInfo jobInfo : scheduler.getAllPendingJobs()) {
+            if (jobInfo.getId() == job_id) {
+                hasBeenScheduled = true;
+                break;
+            }
+        }
+
+        if (!hasBeenScheduled) {
+            ComponentName componentName = new ComponentName(this, NewDataJobService.class);
+            JobInfo info = new JobInfo.Builder(job_id, componentName)
+                    .setPersisted(true)
+                    .setPeriodic(15 * 60 * 1000)
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                    .build();
+
+            JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+            jobScheduler.schedule(info);
+        }
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.olea.aritz.covidtrackingeuskadi;
+package com.olea.aritz.zomorro19;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,7 +56,6 @@ public class TownsTableActivity extends AppCompatActivity {
                 }
 
                 listAdapter = new ListAdapter(towns, instance, item -> {
-                    //TODO: BUG: Se puede hacer click rápido en dos municipios y se abren los dos
                     moveToTownDetails(item);
                 });
 
