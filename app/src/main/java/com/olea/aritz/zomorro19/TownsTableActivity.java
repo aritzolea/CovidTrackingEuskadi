@@ -56,6 +56,7 @@ public class TownsTableActivity extends AppCompatActivity {
                 }
 
                 listAdapter = new ListAdapter(towns, instance, item -> {
+                    //TODO: BUG: Se puede hacer click rápido en dos municipios y se abren los dos
                     moveToTownDetails(item);
                 });
 
