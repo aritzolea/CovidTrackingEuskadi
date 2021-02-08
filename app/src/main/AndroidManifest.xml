@@ -18,7 +18,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7832160278191979~6969589065"/>
+            android:value="ca-app-pub-7832160278191979~3688915064"/>
 
         <activity android:name="com.olea.aritz.zomorro19.TownDetailsActivity"
             android:screenOrientation="portrait" />

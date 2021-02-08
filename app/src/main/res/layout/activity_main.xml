@@ -510,18 +510,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-<!--            <com.google.android.gms.ads.AdView-->
-<!--                android:id="@+id/adView"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentBottom="true"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_marginTop="65dp"-->
-<!--                app:adSize="BANNER"-->
-<!--                app:adUnitId="ca-app-pub-7832160278191979/4010245620"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"></com.google.android.gms.ads.AdView>-->
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="65dp"
+                app:adSize="BANNER"
+                app:adUnitId="ca-app-pub-7832160278191979/8749670057"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></com.google.android.gms.ads.AdView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
