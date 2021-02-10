@@ -9,7 +9,7 @@ public class ListElement implements Serializable {
 
     final String RED = "#FF6F6F";
     final String ORANGE = "#FFA86F";
-    final String YELLOW = "#FFEF00";
+    final String YELLOW = "#FFD800";
     final String GREEN = "#6FFF6F";
     final String WHITE = "#FFFFFF";
 
