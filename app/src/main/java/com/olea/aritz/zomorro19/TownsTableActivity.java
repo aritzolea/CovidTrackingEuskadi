@@ -10,6 +10,10 @@ import android.text.TextUtils;
 import android.view.WindowManager;
 import android.widget.SearchView;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +30,8 @@ public class TownsTableActivity extends AppCompatActivity {
     private SearchView searchView;
 
     private boolean clickable;
+
+    final String FILENAME = "TOWN_FAVS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +55,15 @@ public class TownsTableActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 towns.clear();
                 if (TextUtils.isEmpty(newText)) {
-                    for (ListElement le : BackendData.towns)
-                        towns.add(le);
+                    List<String> favTowns = getFavTownCodes();
+
+                    for (String townCode: favTowns) {
+                        towns.add(getTownFromCode(townCode));
+                    }
+
+                    for (ListElement le : BackendData.towns) {
+                        if (!towns.contains(le)) towns.add(le);
+                    }
                 } else {
                     for (ListElement le : BackendData.towns) {
                         if (le.getTown().toLowerCase().contains(newText.trim().toLowerCase()))
@@ -88,8 +101,14 @@ public class TownsTableActivity extends AppCompatActivity {
     public void init() {
 
         towns = new ArrayList<>();
+        List<String> favTowns = getFavTownCodes();
+
+        for (String townCode: favTowns) {
+            towns.add(getTownFromCode(townCode));
+        }
+
         for (ListElement le : BackendData.towns) {
-            towns.add(le);
+            if (!towns.contains(le)) towns.add(le);
         }
 
         listAdapter = new ListAdapter(towns, this, item -> {
@@ -109,6 +128,44 @@ public class TownsTableActivity extends AppCompatActivity {
         intent.putExtra("ListElement", townItem);
         startActivity(intent);
         clickable = false;
+    }
+
+    public List<String> getFavTownCodes() {
+        FileInputStream inputStream = null;
+
+        List<String> ret = new ArrayList<>();
+
+        try {
+            inputStream = openFileInput(FILENAME);
+            InputStreamReader streamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(streamReader);
+
+            String text = bufferedReader.readLine();
+
+            while (text != null) {
+                ret.add(text);
+                text = bufferedReader.readLine();
+            }
+
+            return ret;
+        } catch (Exception e) {
+            return new ArrayList<>();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+    }
+
+    public ListElement getTownFromCode(String code) {
+        for (ListElement listElement: BackendData.towns) {
+            if (String.valueOf(listElement.getCode()).equals(code)) return listElement;
+        }
+
+        return null;
     }
 
 }

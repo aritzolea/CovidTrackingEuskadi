@@ -9,6 +9,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +50,10 @@ public class TownDetailsActivity extends AppCompatActivity {
     final String GREEN = "#6FFF6F";
     final String GRAY = "#B8B8B8";
 
+    final String FILENAME = "TOWN_FAVS";
+
+    private ListElement element;
+
     private boolean isFav;
 
     @Override
@@ -52,7 +62,7 @@ public class TownDetailsActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_town_details);
 
-        ListElement element = (ListElement) getIntent().getSerializableExtra("ListElement");
+        element = (ListElement) getIntent().getSerializableExtra("ListElement");
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         DateFormat destinyFormat = new SimpleDateFormat("dd/MM");
@@ -122,10 +132,12 @@ public class TownDetailsActivity extends AppCompatActivity {
             i++;
         }
 
-        //TODO HAY QUE MIRAR EN EL FICHERO
-        isFav = false;
+        isFav = fileContainsTown(element.getCode());
 
-        setStarColor();
+        if (!isFav)
+            star.setColorFilter(Color.parseColor(GRAY), PorterDuff.Mode.SRC_IN);
+        else
+            star.setColorFilter(Color.parseColor(YELLOW), PorterDuff.Mode.SRC_IN);
 
         star.setOnClickListener(l -> {
             isFav = !isFav;
@@ -150,10 +162,119 @@ public class TownDetailsActivity extends AppCompatActivity {
 
     public void setStarColor() {
         if (!isFav) {
-            star.setColorFilter(Color.parseColor(GRAY), PorterDuff.Mode.SRC_IN);
+            if (removeFromFavFile(element.getCode()))
+                star.setColorFilter(Color.parseColor(GRAY), PorterDuff.Mode.SRC_IN);
         } else {
-            star.setColorFilter(Color.parseColor(YELLOW), PorterDuff.Mode.SRC_IN);
+            if (addToFavFile(element.getCode()))
+                star.setColorFilter(Color.parseColor(YELLOW), PorterDuff.Mode.SRC_IN);
         }
+    }
+
+    public boolean fileContainsTown(int code) {
+        FileInputStream inputStream = null;
+
+        try {
+            inputStream = openFileInput(FILENAME);
+            InputStreamReader streamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(streamReader);
+
+            String text = bufferedReader.readLine();
+
+            while (text != null) {
+                if (text.startsWith(String.valueOf(code))) return true;
+
+                text = bufferedReader.readLine();
+            }
+
+            return false;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+    }
+
+    public boolean addToFavFile(int code) {
+        if (fileContainsTown(code)) return false;
+
+        FileOutputStream outputStream = null;
+
+        try {
+            outputStream = openFileOutput(FILENAME, MODE_APPEND);
+            outputStream.write((code + "\n").getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public boolean removeFromFavFile(int code) {
+        if (!fileContainsTown(code)) return true;
+
+        FileInputStream inputStream = null;
+        List<String> favTowns = new ArrayList<>();
+
+        try {
+            inputStream = openFileInput(FILENAME);
+            InputStreamReader streamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(streamReader);
+
+            String text = bufferedReader.readLine();
+
+            while (text != null) {
+                if (!text.startsWith(String.valueOf(code))) favTowns.add(text);
+                text = bufferedReader.readLine();
+            }
+        } catch (Exception e) {
+            return false;
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+
+        FileOutputStream outputStream = null;
+
+        try {
+            outputStream = openFileOutput(FILENAME, MODE_PRIVATE);
+            for (String line : favTowns)
+                outputStream.write((line + "\n").getBytes());
+
+        } catch (FileNotFoundException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return true;
+
     }
 
 }
