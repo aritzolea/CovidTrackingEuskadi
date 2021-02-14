@@ -123,7 +123,7 @@ public class NewDataJobService extends JobService {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CovidEuskadiChannel");
-        builder.setContentTitle("COVID Euskadi");
+        builder.setContentTitle("ZOMORRO 19");
         builder.setContentText("Ya están disponibles los nuevos datos!");
         builder.setSmallIcon(R.drawable.ic_lens_black_24dp);
         builder.setAutoCancel(true);
