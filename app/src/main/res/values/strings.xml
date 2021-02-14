@@ -20,4 +20,5 @@
     <string name="municipios">Municipios</string>
     <string name="buscar" >Buscar</string>
     <string name="incidencia_minus" >Incidencia</string>
+    <string name="sin_internet">Esta aplicación no puede funcionar sin conexión a Internet.</string>
 </resources>

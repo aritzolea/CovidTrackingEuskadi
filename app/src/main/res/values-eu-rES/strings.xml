@@ -18,4 +18,5 @@
     <string name="municipios">Udalerriak</string>
     <string name="buscar">Bilatu</string>
     <string name="incidencia_minus">Intzidentzia</string>
+    <string name="sin_internet">Aplikazioak ezin du funtzionatu Internet konexiorik gabe.</string>
 </resources>

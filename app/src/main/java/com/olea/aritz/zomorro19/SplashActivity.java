@@ -9,10 +9,14 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,6 +39,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
@@ -82,6 +87,8 @@ public class SplashActivity extends AppCompatActivity {
         splashSubtitle = findViewById(R.id.splashSubtitle);
         loadingText = findViewById(R.id.loadingText);
 
+        setLocale("es");
+
         splashImageView.setAnimation(bottomAnimation);
         splashTitle.setAnimation(topAnimation);
         splashSubtitle.setAnimation(topAnimation);
@@ -95,7 +102,7 @@ public class SplashActivity extends AppCompatActivity {
                 activeNetwork.isConnectedOrConnecting();
 
         if (!isConnected) {
-            AlertDialog internetDialog = new MaterialAlertDialogBuilder(this).setMessage("Esta aplicación no puede funcionar sin conexión a Internet.")
+            AlertDialog internetDialog = new MaterialAlertDialogBuilder(this).setMessage(R.string.sin_internet)
                     .setPositiveButton("OK", null)
                     .show();
 
@@ -114,10 +121,23 @@ public class SplashActivity extends AppCompatActivity {
         scheduleNewDataDetect();
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
+            if (BackendData.towns != null) {
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
 
-            finish();
+                finish();
+            } else {
+                AlertDialog internetDialog = new MaterialAlertDialogBuilder(this).setMessage(R.string.sin_internet)
+                        .setPositiveButton("OK", null)
+                        .show();
+
+                internetDialog.setOnDismissListener(dialog -> {
+                    finish();
+                    System.exit(0);
+                });
+
+                return;
+            }
         }, 5000);
     }
 
@@ -243,6 +263,21 @@ public class SplashActivity extends AppCompatActivity {
             JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
             jobScheduler.schedule(info);
         }
+    }
+
+    public void setLocale(String lang) {
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        Locale myLocale = new Locale(lang);
+        conf.locale = myLocale;
+
+
+        res.updateConfiguration(conf, dm);
+        getBaseContext().getResources().updateConfiguration(conf, getBaseContext().getResources().getDisplayMetrics());
+
+        splashSubtitle.setText(getString(R.string.monitoriza_la_situaci_n_diaria_de_la_pandemia_en_euskadi));
+        loadingText.setText(getString(R.string.cargando));
     }
 
 }
