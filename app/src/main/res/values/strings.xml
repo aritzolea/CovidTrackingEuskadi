@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Zomorro 19</string>
+    <string name="datos_generales_euskadi">Datos generales Euskadi</string>
+    <string name="ultima_actualizaci_n_xx">Ultima actualización: XX</string>
+    <string name="nuevos_positivos">NUEVOS POSITIVOS</string>
+    <string name="total_hospitalizados">TOTAL HOSPITALIZADOS</string>
+    <string name="total_positivos">TOTAL POSITIVOS</string>
+    <string name="gipuzkoa" translatable="false">GIPUZKOA</string>
+    <string name="bizkaia" translatable="false">BIZKAIA</string>
+    <string name="araba" translatable="false">ARABA</string>
+    <string name="incidencia_14_dias_100_000">INCIDENCIA 14 DIAS / 100.000</string>
+    <string name="total_en_uci">TOTAL EN UCI</string>
+    <string name="datos_por_municipio">Datos por municipio</string>
+    <string name="cargando">Cargando ...</string>
+    <string name="monitoriza_la_situaci_n_diaria_de_la_pandemia_en_euskadi">Monitoriza la situación diaria de la pandemia en Euskadi</string>
+    <string name="habitantes">HABITANTES</string>
+    <string name="incidencia_14_dias">INCIDENCIA 14 DIAS</string>
+    <string name="incidencia">INCIDENCIA</string>
+    <string name="_14_dias_100_000_habitantes">14 DIAS / 100.000 HABITANTES</string>
+    <string name="municipios">Municipios</string>
+    <string name="buscar" >Buscar</string>
+    <string name="incidencia_minus" >Incidencia</string>
 </resources>

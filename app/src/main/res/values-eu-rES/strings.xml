@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Zomorro 19</string>
+    <string name="datos_generales_euskadi">Euskadiko datu orokorrak</string>
+    <string name="ultima_actualizaci_n_xx">Azken eguneraketa: XX</string>
+    <string name="nuevos_positivos">POSITIBO BERRIAK</string>
+    <string name="total_positivos">POSITIBOAK GUZTIRA</string>
+    <string name="incidencia_14_dias_100_000">INTZIDENTZIA 14 EGUN / 100.000</string>
+    <string name="total_hospitalizados">OSPITALERATUAK GUZTIRA</string>
+    <string name="total_en_uci">ZIU-n GUZTIRA</string>
+    <string name="datos_por_municipio">Udalerrien datuak</string>
+    <string name="cargando">Kargatzen ...</string>
+    <string name="monitoriza_la_situaci_n_diaria_de_la_pandemia_en_euskadi">Monitorizatu pandemiaren eguneroko egoera Euskadin</string>
+    <string name="habitantes">BIZTANLEAK</string>
+    <string name="incidencia_14_dias">INTZIDENTZIA 14 EGUN</string>
+    <string name="incidencia">INTZIDENTZIA</string>
+    <string name="_14_dias_100_000_habitantes">14 EGUN / 100.000 BIZTANLE</string>
+    <string name="municipios">Udalerriak</string>
+    <string name="buscar">Bilatu</string>
+    <string name="incidencia_minus">Intzidentzia</string>
+</resources>

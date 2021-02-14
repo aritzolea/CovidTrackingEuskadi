@@ -35,7 +35,7 @@
         android:layout_marginTop="15dp"
         android:width="300dp"
         android:gravity="center_horizontal"
-        android:text="Monitoriza la situación diaria de la pandemia en Euskadi"
+        android:text="@string/monitoriza_la_situaci_n_diaria_de_la_pandemia_en_euskadi"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="122dp"
         android:alpha="0"
-        android:text="Cargando ..."
+        android:text="@string/cargando"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
