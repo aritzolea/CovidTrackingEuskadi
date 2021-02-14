@@ -23,7 +23,7 @@
         android:layout_marginTop="150dp"
         android:text="Zomorro 19"
         android:textColor="#2196F3"
-        android:textSize="30sp"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

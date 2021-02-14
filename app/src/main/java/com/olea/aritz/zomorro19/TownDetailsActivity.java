@@ -3,8 +3,10 @@ package com.olea.aritz.zomorro19;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -34,10 +36,15 @@ public class TownDetailsActivity extends AppCompatActivity {
     private TextView day13, incidence13;
     private TextView day14, incidence14;
 
+    private ImageView star;
+
     final String RED = "#FF6F6F";
     final String ORANGE = "#FFA86F";
     final String YELLOW = "#FFD800";
     final String GREEN = "#6FFF6F";
+    final String GRAY = "#B8B8B8";
+
+    private boolean isFav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +92,8 @@ public class TownDetailsActivity extends AppCompatActivity {
         incidence13 = findViewById(R.id.incidence13);
         incidence14 = findViewById(R.id.incidence14);
 
+        star = findViewById(R.id.star);
+
         List<TextView> daysList = new ArrayList<>();
         daysList.addAll(Arrays.asList(day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14));
 
@@ -112,6 +121,16 @@ public class TownDetailsActivity extends AppCompatActivity {
             }
             i++;
         }
+
+        //TODO HAY QUE MIRAR EN EL FICHERO
+        isFav = false;
+
+        setStarColor();
+
+        star.setOnClickListener(l -> {
+            isFav = !isFav;
+            setStarColor();
+        });
     }
 
     public void applyIncidenceColor(TextView textView) {
@@ -128,4 +147,13 @@ public class TownDetailsActivity extends AppCompatActivity {
         } catch (Exception e) {
         }
     }
+
+    public void setStarColor() {
+        if (!isFav) {
+            star.setColorFilter(Color.parseColor(GRAY), PorterDuff.Mode.SRC_IN);
+        } else {
+            star.setColorFilter(Color.parseColor(YELLOW), PorterDuff.Mode.SRC_IN);
+        }
+    }
+
 }

@@ -19,20 +19,32 @@
 
             <TextView
                 android:id="@+id/townName"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="26dp"
                 android:layout_marginEnd="26dp"
                 android:height="75dp"
                 android:gravity="center"
-                android:maxWidth="350dp"
+                android:maxWidth="280dp"
                 android:text="Beasain"
                 android:textAlignment="center"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="30dp"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_star" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,7 +90,7 @@
                             android:width="150dp"
                             android:gravity="center"
                             android:text="HABITANTES"
-                            android:textSize="18sp"
+                            android:textSize="18dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,7 +101,7 @@
                             android:layout_marginTop="310dp"
                             android:gravity="center"
                             android:text="INCIDENCIA 14 DIAS"
-                            android:textSize="18sp"
+                            android:textSize="18dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -103,7 +115,7 @@
                             android:width="150dp"
                             android:gravity="center"
                             android:text="R0"
-                            android:textSize="18sp"
+                            android:textSize="18dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -116,7 +128,7 @@
                             android:width="150dp"
                             android:gravity="center"
                             android:text="INCIDENCIA"
-                            android:textSize="18sp"
+                            android:textSize="18dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -129,7 +141,7 @@
                             android:width="150dp"
                             android:gravity="center"
                             android:text="575.14"
-                            android:textSize="24sp"
+                            android:textSize="24dp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -143,7 +155,7 @@
                             android:width="150dp"
                             android:text="14 DIAS / 100.000 HABITANTES"
                             android:textAlignment="center"
-                            android:textSize="8sp"
+                            android:textSize="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -156,7 +168,7 @@
                             android:width="150dp"
                             android:gravity="center"
                             android:text="14.000"
-                            android:textSize="24sp"
+                            android:textSize="24dp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -170,7 +182,7 @@
                             android:width="150dp"
                             android:gravity="center"
                             android:text="1.06"
-                            android:textSize="24sp"
+                            android:textSize="24dp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />

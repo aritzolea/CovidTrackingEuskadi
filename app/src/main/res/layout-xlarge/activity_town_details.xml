@@ -24,16 +24,29 @@
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="26dp"
+                android:width="600dp"
                 android:height="75dp"
                 android:gravity="center"
                 android:maxWidth="350dp"
                 android:text="Beasain"
                 android:textAlignment="center"
-                android:textSize="36sp"
+                android:textSize="36dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+                android:layout_marginEnd="50dp"
+                android:scaleX="2"
+                android:scaleY="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_star" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -79,7 +92,7 @@
                             android:width="250dp"
                             android:gravity="center"
                             android:text="HABITANTES"
-                            android:textSize="30sp"
+                            android:textSize="30dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -144,7 +157,7 @@
                             android:width="180dp"
                             android:text="14 DIAS / 100.000 HABITANTES"
                             android:textAlignment="center"
-                            android:textSize="12sp"
+                            android:textSize="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

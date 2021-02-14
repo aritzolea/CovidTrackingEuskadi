@@ -25,7 +25,7 @@
         android:layout_marginTop="120dp"
         android:text="Zomorro 19"
         android:textColor="#2196F3"
-        android:textSize="56sp"
+        android:textSize="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
         android:width="550dp"
         android:gravity="center_horizontal"
         android:text="Monitoriza la situación diaria de la pandemia en Euskadi"
-        android:textSize="32sp"
+        android:textSize="32dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
