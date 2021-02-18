@@ -11,8 +11,8 @@ android {
         applicationId "com.olea.aritz.zomorro19"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "1"
+        versionCode 3
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

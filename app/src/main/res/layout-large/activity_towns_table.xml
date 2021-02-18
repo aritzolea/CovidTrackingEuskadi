@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAFAFA"
-    tools:context=".TownsTableActivity">
+    tools:context=".TownsTableActivity"
+    tools:ignore="MissingDefaultResource">
 
     <TextView
         android:id="@+id/textView"

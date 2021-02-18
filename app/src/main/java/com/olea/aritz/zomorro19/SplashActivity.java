@@ -4,19 +4,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -30,16 +23,13 @@ import com.android.volley.toolbox.Volley;
 
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
@@ -51,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
 
-    final String FILENAME = "LASTUPDATE";
+    final String TOPIC = "NEW_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +49,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC);
 
         MobileAds.initialize(this, initializationStatus -> {
         });
@@ -86,8 +78,6 @@ public class SplashActivity extends AppCompatActivity {
         splashTitle = findViewById(R.id.splashTitle);
         splashSubtitle = findViewById(R.id.splashSubtitle);
         loadingText = findViewById(R.id.loadingText);
-
-        setLocale("es");
 
         splashImageView.setAnimation(bottomAnimation);
         splashTitle.setAnimation(topAnimation);
@@ -117,8 +107,6 @@ public class SplashActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         getGeneralAndTownsInfo();
-
-        scheduleNewDataDetect();
 
         new Handler().postDelayed(() -> {
             if (BackendData.towns != null) {
@@ -165,7 +153,6 @@ public class SplashActivity extends AppCompatActivity {
                         BackendData.incidenceBI = jsonObject.getDouble("incidencebi");
                         BackendData.incidenceAR = jsonObject.getDouble("incidencear");
 
-                        writeLastUpdateDate(BackendData.lastUpdateDate);
                     } catch (JSONException e) {
                         //TODO: Dar error al LEER los datos
                     }
@@ -215,69 +202,6 @@ public class SplashActivity extends AppCompatActivity {
 
         requestQueue.add(generalDataRequest);
         requestQueue.add(townsRequest);
-    }
-
-    public void writeLastUpdateDate(String lastUpdate) {
-        FileOutputStream outputStream = null;
-
-        try {
-            outputStream = openFileOutput(FILENAME, MODE_PRIVATE);
-            outputStream.write(lastUpdate.getBytes());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void scheduleNewDataDetect() {
-        int job_id = 987;
-
-        JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-
-        boolean hasBeenScheduled = false;
-
-        for (JobInfo jobInfo : scheduler.getAllPendingJobs()) {
-            if (jobInfo.getId() == job_id) {
-                hasBeenScheduled = true;
-                break;
-            }
-        }
-
-        if (!hasBeenScheduled) {
-            ComponentName componentName = new ComponentName(this, NewDataJobService.class);
-            JobInfo info = new JobInfo.Builder(job_id, componentName)
-                    .setPersisted(true)
-                    .setPeriodic(15 * 60 * 1000)
-                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                    .build();
-
-            JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-            jobScheduler.schedule(info);
-        }
-    }
-
-    public void setLocale(String lang) {
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        Locale myLocale = new Locale(lang);
-        conf.locale = myLocale;
-
-
-        res.updateConfiguration(conf, dm);
-        getBaseContext().getResources().updateConfiguration(conf, getBaseContext().getResources().getDisplayMetrics());
-
-        splashSubtitle.setText(getString(R.string.monitoriza_la_situaci_n_diaria_de_la_pandemia_en_euskadi));
-        loadingText.setText(getString(R.string.cargando));
     }
 
 }
