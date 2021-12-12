@@ -130,8 +130,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void getGeneralAndTownsInfo() {
-        String generalDataUrl = "http://35.180.25.221:1512/general_data";
-        String townsDataUrl = "http://35.180.25.221:1512/towns";
+        String generalDataUrl = "http://15.236.145.199:1512/general_data";
+        String townsDataUrl = "http://15.236.145.199:1512/towns";
 
         JsonArrayRequest generalDataRequest = new JsonArrayRequest(Request.Method.GET, generalDataUrl, null,
                 response -> {
